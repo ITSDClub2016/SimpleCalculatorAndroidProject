@@ -1,6 +1,8 @@
 Simple Calculator (for Android)
 ===================
 
+[![Build Status](https://travis-ci.org/ITSDClub2016/SimpleCalculatorAndroidProject.svg?branch=master)](https://travis-ci.org/ITSDClub2016/SimpleCalculatorAndroidProject)
+
 Simple Calculator is an open source project for smartphones and tablets running on the Android operating system. It is licensed under the MIT License.
 
 ## Licensing ##
