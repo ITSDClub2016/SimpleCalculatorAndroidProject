@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Simple Calculator</string>
+    <string name="app_description">A simple open source calculator for smartphones and tablets running on the Android operating system</string>
     <string name="Backspace"><![CDATA[<-]]></string>
 </resources>
