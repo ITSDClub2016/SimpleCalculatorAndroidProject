@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">SimpleCalculator</string>
+    <string name="app_name">Simple Calculator</string>
     <string name="Backspace"><![CDATA[<-]]></string>
 </resources>
