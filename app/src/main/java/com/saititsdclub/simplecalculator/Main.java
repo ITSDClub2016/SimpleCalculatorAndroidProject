@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.saititsdclub.simplecalculator.operators.InfixHandler;
+import com.saititsdclub.simplecalculator.operators.PostfixHandler;
+
 public class Main extends AppCompatActivity {
     EditText editTextFormula;
     EditText editTextAnswer;
@@ -22,6 +25,7 @@ public class Main extends AppCompatActivity {
 
         addActionListenersToNumberButtons();
         addActionListenerToBackButton();
+        addActionListenerToEqualsButton();
 
         this.setEditTextOnlySelectable(editTextFormula);
         this.setEditTextOnlySelectable(editTextAnswer);
@@ -31,6 +35,23 @@ public class Main extends AppCompatActivity {
         editText.setInputType(InputType.TYPE_NULL);
         editText.setTextIsSelectable(true);
         editText.setKeyListener(null);
+    }
+
+    private void addActionListenerToEqualsButton(){
+        Button equalsButton = (Button) findViewById(R.id.buttonEquals);
+        equalsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String input = editTextFormula.getText().toString();
+
+                InfixHandler ih=new InfixHandler(input);
+                PostfixHandler ph=new PostfixHandler(ih.getPostfix());
+                Double result=ph.evaluate();
+
+                editTextAnswer.setText(Double.toString(result));
+            }
+        });
     }
 
     private void addActionListenersToNumberButtons(){
