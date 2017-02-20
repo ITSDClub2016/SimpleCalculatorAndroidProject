@@ -16,7 +16,8 @@
         android:layout_alignParentStart="true"
         android:id="@+id/editTextFormula"
         android:layout_alignParentEnd="true"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textAlignment="textEnd" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -28,7 +29,8 @@
         android:id="@+id/editTextAnswer"
         android:layout_alignParentEnd="true"
         android:inputType="none"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textAlignment="textEnd" />
 
     <TableLayout
         android:layout_height="match_parent"

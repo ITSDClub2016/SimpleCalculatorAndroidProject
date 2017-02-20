@@ -48,7 +48,7 @@ public class InfixHandler {
                     stack.add(sign);
                 }else if (sign=='+' || sign =='-'){
 
-                    while (((stack.get(stack.size()-1)=='/') || (stack.get(stack.size()-1)=='*') || (stack.get(stack.size()-1))=='+' || (stack.get(stack.size()-1)=='-')) && (stack.get(stack.size()-1)!='(')){
+                    while ((!stack.isEmpty()) && ((stack.get(stack.size()-1)=='/') || (stack.get(stack.size()-1)=='*') || (stack.get(stack.size()-1))=='+' || (stack.get(stack.size()-1)=='-')) && (stack.get(stack.size()-1)!='(')){
                         postfix.add(Character.toString(stack.remove(stack.size()-1)));
                     }
 

@@ -26,6 +26,7 @@ public class Main extends AppCompatActivity {
         addActionListenersToNumberButtons();
         addActionListenerToBackButton();
         addActionListenerToEqualsButton();
+        addActionListenersToOperatorButtons();
 
         this.setEditTextOnlySelectable(editTextFormula);
         this.setEditTextOnlySelectable(editTextAnswer);
@@ -35,6 +36,29 @@ public class Main extends AppCompatActivity {
         editText.setInputType(InputType.TYPE_NULL);
         editText.setTextIsSelectable(true);
         editText.setKeyListener(null);
+    }
+
+    private void addActionListenersToOperatorButtons(){
+        Button addButton=(Button) findViewById(R.id.buttonAdd);
+        Button substractButton=(Button) findViewById(R.id.buttonSubtract);
+        Button timesButton=(Button) findViewById(R.id.buttonMultiply);
+        Button divideButton=(Button) findViewById(R.id.buttonDivide);
+
+        addActionListenerToOperatorButton(addButton, '+');
+        addActionListenerToOperatorButton(substractButton, '-');
+        addActionListenerToOperatorButton(timesButton, '*');
+        addActionListenerToOperatorButton(divideButton, '/');
+    }
+
+    private void addActionListenerToOperatorButton(Button button, final char operator){
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String input = editTextFormula.getText().toString();
+                input = input + operator;
+                editTextFormula.setText(input);
+            }
+        });
     }
 
     private void addActionListenerToEqualsButton(){
