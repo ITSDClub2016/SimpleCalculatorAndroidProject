@@ -1,35 +1,67 @@
 package com.saititsdclub.simplecalculator;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.saititsdclub.simplecalculator.operators.InfixHandler;
 import com.saititsdclub.simplecalculator.operators.PostfixHandler;
 
+import junit.framework.Test;
+
+import org.w3c.dom.Text;
+
 public class Main extends AppCompatActivity {
-    EditText editTextFormula;
-    EditText editTextAnswer;
+    TextView editTextFormula;
+    TextView editTextAnswer;
+    LinearLayout textListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 
-        editTextFormula = (EditText)findViewById(R.id.editTextFormula);
-        editTextAnswer = (EditText)findViewById(R.id.editTextAnswer);
-
         addActionListenersToNumberButtons();
         addActionListenerToBackButton();
         addActionListenerToEqualsButton();
         addActionListenersToOperatorButtons();
 
-        this.setEditTextOnlySelectable(editTextFormula);
-        this.setEditTextOnlySelectable(editTextAnswer);
+        textListView = (LinearLayout) findViewById(R.id.textView);
+
+        setUpNewText();
+    }
+
+    private void setUpNewText(){
+        editTextFormula = getNewFormulaText();
+        editTextAnswer = getNewAnswerText();
+        textListView.addView(editTextFormula);
+        textListView.addView(editTextAnswer);
+    }
+
+    private TextView getNewFormulaText() {
+        TextView currentFormula = new TextView(this);
+        currentFormula.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+        currentFormula.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        currentFormula.setTextColor(Color.BLACK);
+        return currentFormula;
+    }
+
+    private TextView getNewAnswerText() {
+        TextView currentAnswer = new TextView(this);
+        currentAnswer.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+        currentAnswer.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+        currentAnswer.setTextColor(Color.BLACK);
+        return currentAnswer;
     }
 
     private void setEditTextOnlySelectable(EditText editText) {
@@ -74,6 +106,11 @@ public class Main extends AppCompatActivity {
                 Double result=ph.evaluate();
 
                 editTextAnswer.setText(Double.toString(result));
+
+                TextView padding = new TextView(getApplicationContext());
+                textListView.addView(padding);
+
+                setUpNewText();
             }
         });
     }
