@@ -3,6 +3,8 @@ package com.saititsdclub.simplecalculator.operators;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.saititsdclub.simplecalculator.exceptions.InvalidFormulaException;
+
 import java.util.ArrayList;
 import java.util.Queue;
 
@@ -23,11 +25,16 @@ public class InfixHandler {
         stack=new ArrayList<>();
     }
 
-    public ArrayList<String> getPostfix(){
+    public ArrayList<String> getPostfix() throws InvalidFormulaException {
         String infix=this.infix;
+        boolean lastWasNumber = false;
 
         //While there's still something left infix
         while (infix.length()>0){
+            boolean isNumber = isNumberNext(infix);
+
+            if (!lastWasNumber && !isNumber)
+                throw new InvalidFormulaException("An operator cannot be after another operator");
 
             if (isNumberNext(infix)){
 
@@ -36,6 +43,8 @@ public class InfixHandler {
                 infix=trimFirstNumber(infix);
 
                 postfix.add(Integer.toString(number));
+
+                lastWasNumber = true;
             }else{
 
                 //if it's a sign, get the sign
@@ -68,6 +77,8 @@ public class InfixHandler {
                         stack.remove(stack.size()-1);
                     }
                 }
+
+                lastWasNumber = false;
             }
         }
 
@@ -113,8 +124,13 @@ public class InfixHandler {
 
 
     public static void main(String[] args){
-        InfixHandler ih=new InfixHandler("25-(4+2*3)/2");
-        ih.getPostfix();
+        try {
+            InfixHandler ih=new InfixHandler("25-(4+2*3)/2");
+            ih.getPostfix();
+        } catch (InvalidFormulaException ex) {
+
+        }
+
     }
 
 }
