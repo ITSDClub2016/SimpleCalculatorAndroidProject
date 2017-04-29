@@ -31,6 +31,7 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 
+        addActionListenerToClearEverythingButton();
         addActionListenersToNumberButtons();
         addActionListenerToBackButton();
         addActionListenerToEqualsButton();
@@ -68,6 +69,17 @@ public class Main extends AppCompatActivity {
         editText.setInputType(InputType.TYPE_NULL);
         editText.setTextIsSelectable(true);
         editText.setKeyListener(null);
+    }
+
+    private void addActionListenerToClearEverythingButton() {
+        Button clearButton = (Button)findViewById(R.id.buttonClearAll);
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textListView.removeAllViews();
+                setUpNewText();
+            }
+        });
     }
 
     private void addActionListenersToOperatorButtons(){
