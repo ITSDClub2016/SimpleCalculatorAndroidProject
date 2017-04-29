@@ -1,6 +1,8 @@
 package com.saititsdclub.simplecalculator;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -14,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.saititsdclub.simplecalculator.exceptions.InvalidFormulaException;
 import com.saititsdclub.simplecalculator.operators.InfixHandler;
 import com.saititsdclub.simplecalculator.operators.PostfixHandler;
 
@@ -113,11 +116,16 @@ public class Main extends AppCompatActivity {
 
                 String input = editTextFormula.getText().toString();
 
-                InfixHandler ih=new InfixHandler(input);
-                PostfixHandler ph=new PostfixHandler(ih.getPostfix());
-                Double result=ph.evaluate();
+                try {
+                    InfixHandler ih=new InfixHandler(input);
+                    PostfixHandler ph=new PostfixHandler(ih.getPostfix());
+                    Double result=ph.evaluate();
 
-                editTextAnswer.setText(Double.toString(result));
+                    editTextAnswer.setText(Double.toString(result));
+                } catch (InvalidFormulaException ex) {
+                    editTextFormula.setTextColor(Color.RED);
+                    showMessageBox(ex.getMessage());
+                }
 
                 TextView padding = new TextView(getApplicationContext());
                 textListView.addView(padding);
@@ -125,6 +133,12 @@ public class Main extends AppCompatActivity {
                 setUpNewText();
             }
         });
+    }
+
+    private void showMessageBox(String message) {
+        MessageBox msgBox = new MessageBox();
+        msgBox.setMessage(message);
+        msgBox.show(getFragmentManager(), null);
     }
 
     private void addActionListenersToNumberButtons(){
