@@ -25,6 +25,11 @@ public class InfixHandler {
         stack=new ArrayList<>();
     }
 
+    /**
+     * Converts infix to postfix
+     * @return Postfix as an ArrayList of type String
+     * @throws InvalidFormulaException Thrown if there was a problem parsing the formula
+     */
     public ArrayList<String> getPostfix() throws InvalidFormulaException {
         String infix=this.infix;
         boolean lastWasNumber = false;
