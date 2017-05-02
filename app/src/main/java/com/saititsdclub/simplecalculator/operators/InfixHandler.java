@@ -41,7 +41,7 @@ public class InfixHandler {
             if (!lastWasNumber && !isNumber)
                 throw new InvalidFormulaException("An operator cannot be after another operator");
 
-            if (isNumberNext(infix)){
+            if (isNumber){
 
                 //if it's a number, get the number
                 int number=getFirstNumber(infix);
