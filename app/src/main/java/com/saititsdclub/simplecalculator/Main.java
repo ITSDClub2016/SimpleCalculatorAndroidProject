@@ -104,6 +104,11 @@ public class Main extends AppCompatActivity {
                 String input = editTextFormula.getText().toString();
                 int lastCharIndex = input.length() - 1;
 
+                if (lastCharIndex == -1) {
+                    showMessageBox("Formula must start with a number and not a operator.");
+                    return;
+                }
+
                 if (Character.isDigit(input.charAt(lastCharIndex))) {
                     // If last character is number, append operator
                     input = input + operator;
