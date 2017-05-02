@@ -102,7 +102,16 @@ public class Main extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = editTextFormula.getText().toString();
-                input = input + operator;
+                int lastCharIndex = input.length() - 1;
+
+                if (Character.isDigit(input.charAt(lastCharIndex))) {
+                    // If last character is number, append operator
+                    input = input + operator;
+                } else {
+                    // If last character is operator, replace it with other operator
+                    input = input.substring(0, lastCharIndex) + operator;
+                }
+
                 editTextFormula.setText(input);
             }
         });
